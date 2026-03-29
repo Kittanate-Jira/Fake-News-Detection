@@ -7,11 +7,16 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from fastapi.responses import FileResponse 
 
 nltk.download('stopwords')
 nltk.download('wordnet')
 
 app = FastAPI()
+
+@app.get("/")
+def serve_homepage():
+    return FileResponse("index.html")
 
 # Allow frontend to talk to backend
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
